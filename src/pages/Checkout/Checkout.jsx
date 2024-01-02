@@ -25,7 +25,7 @@ const Checkout = () => {
             service: title,
         }
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://genius-car-server-lilac-nu.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

@@ -7,7 +7,7 @@ const Bookings = () => {
     const { user } = useContext(AuthContext);
     const [bookings, setBookings] = useState([]);
     const navigate = useNavigate();
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+    const url = `https://genius-car-server-lilac-nu.vercel.app/bookings?email=${user?.email}`;
     useEffect(() => {
         fetch(url, {
             method: 'GET',
@@ -31,7 +31,7 @@ const Bookings = () => {
     const hendleDelete = _id => {
         const process = confirm('Are you sure');
         if (process) {
-            fetch(`http://localhost:5000/bookings/${_id}`, {
+            fetch(`https://genius-car-server-lilac-nu.vercel.app/bookings/${_id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -49,7 +49,7 @@ const Bookings = () => {
         console.log(_id);
         const process = confirm('Are you sure');
         if (process) {
-            fetch(`http://localhost:5000/bookings/${_id}`, {
+            fetch(`https://genius-car-server-lilac-nu.vercel.app/bookings/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
