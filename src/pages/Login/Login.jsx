@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
 import loginImg from './../../assets/images/login/login.svg'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 const Login = () => {
     const { loginUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     const hendleLogin = e => {
         e.preventDefault();
         const form = e.target;
@@ -11,7 +15,12 @@ const Login = () => {
         const password = form.password.value;
         loginUser(email, password)
             .then(result => {
-                console.log(result.user);
+                const user = result.user;
+
+                console.log(user);
+                navigate(from, { replace: true })
+
+
             })
             .catch(err => console.log(err))
 
@@ -44,8 +53,10 @@ const Login = () => {
                             <input className="btn btn-primary" type="submit" value="Login" />
 
                         </div>
+
                     </form>
-                    <p className='text-center'>New to Genius Car <Link to='/signup' className='text-orange-600 font-semibold '>Sign Up</Link></p>
+                    <SocialLogin></SocialLogin>
+                    <p className='text-center mt-3'>New to Genius Car <Link to='/signup' className='text-orange-600 font-semibold '>Sign Up</Link></p>
                 </div>
             </div>
         </div>

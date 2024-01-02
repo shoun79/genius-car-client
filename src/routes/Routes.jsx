@@ -6,6 +6,11 @@ import Home from "../pages/Home/Home/Home";
 import LoginLayout from "../layout/LoginLayout";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
+import CheckoutLayout from "../layout/CheckoutLayout";
+import Checkout from "../pages/Checkout/Checkout";
+import Bookings from "../pages/Bookings/Bookings";
+import PrivateRoutes from "./PrivateRoutes";
+
 
 
 
@@ -33,6 +38,22 @@ const router = createBrowserRouter([
                 element: <SignUp></SignUp>
             }
         ]
+    },
+    {
+        path: '/',
+        element: <CheckoutLayout></CheckoutLayout>,
+        children: [
+            {
+                path: '/checkout/:id',
+                element: <PrivateRoutes><Checkout></Checkout></PrivateRoutes>,
+                loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+            },
+            {
+                path: '/bookings',
+                element: <PrivateRoutes><Bookings></Bookings></PrivateRoutes>
+            }
+        ]
+
     }
 ]);
 

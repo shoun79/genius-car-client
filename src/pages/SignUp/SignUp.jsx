@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import loginImg from './../../assets/images/login/login.svg'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 const SignUp = () => {
     const { createUser, updateName } = useContext(AuthContext);
     const hendleSignUp = e => {
@@ -63,7 +64,8 @@ const SignUp = () => {
 
                         </div>
                     </form>
-                    <p className='text-center'>Already have an account <Link to='/login' className='text-orange-600 font-semibold '>Login</Link></p>
+                    <SocialLogin></SocialLogin>
+                    <p className='text-center mt-3'>Already have an account <Link to='/login' className='text-orange-600 font-semibold '>Login</Link></p>
                 </div>
             </div>
         </div>

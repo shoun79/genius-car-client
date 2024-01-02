@@ -1,10 +1,29 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const hendleLogOut = () => {
+        logOut()
+            .then(() => {
 
+                navigate('/login');
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+    }
     const menuItems = <>
         <li className="font-semibold">  <Link to='/'>Home</Link> </li>
-        <li className="font-semibold">  <Link to='/login'>Login</Link> </li>
+        {
+            user?.email ? <> <li className="font-semibold">  <Link to='/bookings'>My Bookings</Link> </li>
+                <li> <button onClick={hendleLogOut} >Log out</button> </li>
+            </> : <li className="font-semibold">  <Link to='/login'>Login</Link> </li>
+
+        }
     </>
     return (
         <div className="navbar h-20 bg-base-100">
